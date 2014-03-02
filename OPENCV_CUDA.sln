@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HSI", "HSI\HSI.vcxproj", "{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sobel", "sobel\sobel.vcxproj", "{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Debug|Win32.Build.0 = Debug|Win32
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Debug|x64.ActiveCfg = Debug|x64
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Debug|x64.Build.0 = Debug|x64
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Release|Win32.ActiveCfg = Release|Win32
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Release|Win32.Build.0 = Release|Win32
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Release|x64.ActiveCfg = Release|x64
+		{3A57F099-F2F2-43A1-ACDE-C06C37F462B2}.Release|x64.Build.0 = Release|x64
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Debug|Win32.Build.0 = Debug|Win32
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Debug|x64.ActiveCfg = Debug|x64
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Debug|x64.Build.0 = Debug|x64
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Release|Win32.ActiveCfg = Release|Win32
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Release|Win32.Build.0 = Release|Win32
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Release|x64.ActiveCfg = Release|x64
+		{8A8D6AA7-BEAE-41B1-80E1-FF2C0935C48D}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
