@@ -163,7 +163,7 @@ int FastSobel(unsigned char *in, int width, int height, int widthStep,
 
 }
 
-int _tmain(int argc, char* argv[])
+int main(int argc, char* argv[])
 
 {
 

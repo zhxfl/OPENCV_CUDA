@@ -64,8 +64,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Configuration)\..\..\bin\sobel</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\..\bin\sobel</OutDir>
     <IncludePath>D:\program\opencv-2.4.6.0\vs2010\install\include;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\program\opencv-2.4.6.0\vs2010\install\lib;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\program\opencv-2.4.6.0\vs2010\install\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
