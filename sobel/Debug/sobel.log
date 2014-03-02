@@ -1,12 +1,15 @@
-﻿生成启动时间为 2014/3/3 0:22:29。
+﻿生成启动时间为 2014/3/3 2:06:20。
      1>项目“D:\code\OPENCV_CUDA\sobel\sobel.vcxproj”在节点 2 上(clean 个目标)。
-     1>CudaClean:
-         cmd.exe /C "C:\Users\acer\AppData\Local\Temp\tmp5d4b53d2915e4153b035842c95cacf8c.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -ccbin "D:\program\vs2010\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\sobel.cu.obj "D:\code\OPENCV_CUDA\sobel\sobel.cu" -clean
+     1>_PrepareForClean:
+         正在删除文件“Debug\sobel.lastbuildstate”。
+       CudaClean:
+         cmd.exe /C "C:\Users\acer\AppData\Local\Temp\tmp3f6f611b9a5143b6a9dc15b3a84c6b6e.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -ccbin "D:\program\vs2010\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\main.cpp.obj "D:\code\OPENCV_CUDA\sobel\main.cpp" -clean
          
-         D:\code\OPENCV_CUDA\sobel>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -ccbin "D:\program\vs2010\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\sobel.cu.obj "D:\code\OPENCV_CUDA\sobel\sobel.cu" -clean 
+         D:\code\OPENCV_CUDA\sobel>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -ccbin "D:\program\vs2010\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\main.cpp.obj "D:\code\OPENCV_CUDA\sobel\main.cpp" -clean 
+         正在删除文件“Debug\main.cpp.deps”。
      1>已完成生成项目“D:\code\OPENCV_CUDA\sobel\sobel.vcxproj”(clean 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:00.80
+已用时间 00:00:00.83

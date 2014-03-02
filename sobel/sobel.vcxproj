@@ -145,7 +145,13 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="sobel.cu" />
+    <CudaCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CppSobel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CppSobel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
