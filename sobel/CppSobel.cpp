@@ -67,8 +67,9 @@ void CppSobel(IplImage* in, IplImage *out,
 			for (j=1;j<width-1;j++, pEdgeYPtr++)
 			{
 				*pEdgeYPtr
-					= (*inPtr1++ * 1 + (int)*inPtr2++ * 2 + *inPtr3++ * 1)
-					- (*inPtr4++ * 1 + (int)*inPtr5++ * 2 + *inPtr6++ * 1);
+					= (*inPtr1++ + (int)*inPtr2++ * 2 + *inPtr3++)
+					- (*inPtr4++ + (int)*inPtr5++ * 2 + *inPtr6++);
+				edgeYMax = std::min(edgeYMax, *pEdgeYPtr);
 			}
 		}
 	}
@@ -76,15 +77,8 @@ void CppSobel(IplImage* in, IplImage *out,
 	{
 		for (i=1;i<height-1;i++)
 		{
-			pEdgeXPtr = pEdgeX + i*width + 1;
-			inPtr = (uchar*)in->imageData + i * widthStep + 1;
+			pEdgeXPtr = pEdgeX + i * width + 1;
 			outPtr = (uchar*)out->imageData + i * widthStep + 1;
-			inPtr1 = inPtr + widH - widV;
-			inPtr2 = inPtr + widH;
-			inPtr3 = inPtr + widH + widV;
-			inPtr4 = inPtr - widH - widV;
-			inPtr5 = inPtr - widH;
-			inPtr6 = inPtr - widH + widV;
 			for (j=1;j<width-1;j++, pEdgeXPtr++)
 			{
 				*outPtr = 255.0f * (*pEdgeXPtr) / edgeXMax;
@@ -94,9 +88,15 @@ void CppSobel(IplImage* in, IplImage *out,
 	}
 	else if(!xorder && yorder)
 	{
-		for(i = 0; i < height; i++)
+		for (i=1;i<height-1;i++)
 		{
-			strcpy(out->imageData + i * widthStep, (char*)pEdgeY + i * width);
+			pEdgeYPtr = pEdgeY + i * width + 1;
+			outPtr = (uchar*)out->imageData + i * widthStep + 1;
+			for (j=1;j<width-1;j++, pEdgeYPtr++)
+			{
+				*outPtr = 255.0f * (*pEdgeYPtr) / edgeYMax;
+				outPtr++;
+			}
 		}
 	}
 	else
@@ -105,11 +105,9 @@ void CppSobel(IplImage* in, IplImage *out,
 		{
 			pEdgeXPtr = pEdgeX + i*width + 1;
 			pEdgeYPtr = pEdgeY + i*width + 1;
-			//angPtr = ang + i * widthStep + 1;
 			edgPtr = (uchar*)out->imageData + i * widthStep + 1;
 			for (j=1; j<width-1; j++, pEdgeYPtr++, pEdgeXPtr++, edgPtr++)
 			{
-				//*angPtr = atan2((double)*pEdgeYPtr,(double)*pEdgeXPtr)*180/3.141592654;
 				int x = *pEdgeXPtr;
 				int y = *pEdgeYPtr;
 				*edgPtr = (uchar)std::min(255,(int)(sqrt(0.0f + x * x + y * y)/2));

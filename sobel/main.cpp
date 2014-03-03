@@ -24,7 +24,7 @@ void runCppSobel()
 	cvCvtColor(pSrc, pIn, CV_BGR2GRAY);  // color to gray
 	cv::TickMeter tm;
 	tm.start();
-	CppSobel(pIn,pOut,1,0);
+	CppSobel(pIn,pOut, 1, 0);
 	tm.stop();
 	printf("CppSobel time: %4.4f ms\n", tm.getTimeMilli());
 	cvNamedWindow("CppSobel",1);
@@ -48,8 +48,8 @@ void runCvSobel()
 
 int main()
 {
-	runCppSobel();
 	runCvSobel();
+	runCppSobel();
 	cvWaitKey(0);
 	return 0;
 
