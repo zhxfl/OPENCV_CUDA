@@ -47,7 +47,7 @@ void CppSobel(IplImage* in, IplImage *out,
 				*pEdgeXPtr
 					= (*inPtr1++ + (int)*inPtr2++ * 2 + *inPtr3++)
 					- (*inPtr4++ + (int)*inPtr5++ * 2 + *inPtr6++);
-				//edgeXMax = std::min(edgeXMax, *pEdgeXPtr);
+				edgeXMax = std::min(edgeXMax, *pEdgeXPtr);
 			}
 		}
 	}
