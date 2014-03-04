@@ -22,15 +22,34 @@ void runCvSobel()
 	_out.create(_in.size(), CV_MAKETYPE(CV_32F, _in.channels()));
 	cv::TickMeter tm;
 	tm.start();
-	Sobel(_in, _out, CV_32F, 1,0);
+	Sobel(_in, _out, CV_32F, 0, 1);
 	tm.stop();
 	printf("cvSobel  time: %4.4f ms\n", tm.getTimeMilli());
-	for(int i = 0; i < 10; i++)
+	/*for(int i = 0; i < 10; i++)
 	{
 		printf("%f ",_out.at<float>(1,i));
-	}printf("\n");
+	}printf("\n");*/
 	cvNamedWindow("cvSobel",1);
 	imshow("cvSobel",_out);
+}
+
+void runCppSobel_1()
+{
+	cv::Mat inImage = loadImage("1.jpg");
+	cv::Mat _out;
+	_out.create(inImage.size(), CV_MAKETYPE(CV_32F, inImage.channels()));
+	cv::TickMeter tm;
+	tm.start();
+	CppSobel_1(inImage, _out, 0, 1);
+	tm.stop();
+
+	printf("CppSobel_1 time: %4.4f ms\n", tm.getTimeMilli());
+	/*for(int i = 0; i < 10; i++)
+	{
+		printf("%f ",_out.at<float>(1,i));
+	}printf("\n");*/
+	cvNamedWindow("CppSobel_1",1);
+	imshow("CppSobel_1",_out);
 }
 
 void runCppSobel()
@@ -40,23 +59,27 @@ void runCppSobel()
 	_out.create(inImage.size(), CV_MAKETYPE(CV_32F, inImage.channels()));
 	cv::TickMeter tm;
 	tm.start();
-	CppSobel(inImage, _out, 1,0);
+	CppSobel(inImage, _out, 0, 1);
 	tm.stop();
 
-	printf("cvSobel  time: %4.4f ms\n", tm.getTimeMilli());
-	for(int i = 0; i < 10; i++)
+	printf("CppSobel time: %4.4f ms\n", tm.getTimeMilli());
+	/*for(int i = 0; i < 10; i++)
 	{
 		printf("%f ",_out.at<float>(1,i));
-	}printf("\n");
-	cvNamedWindow("cvSobel_",1);
-	imshow("cvSobel_",_out);
+	}printf("\n");*/
+	cvNamedWindow("CppSobel",1);
+	imshow("CppSobel",_out);
 }
 
 
 int main()
 {
-	runCvSobel();
 	runCppSobel();
+
+	runCvSobel();
+	
+	runCppSobel_1();
+
 	cvWaitKey(0);
 	return 0;
 }

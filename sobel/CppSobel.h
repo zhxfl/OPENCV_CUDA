@@ -7,6 +7,7 @@
 
 void CppSobel(const cv::Mat &in, cv::Mat &out,
 	int xorder, int yorder);
-
+void CppSobel_1(const cv::Mat &in, cv::Mat &out,
+	int xorder, int yorder);
 
 #endif
