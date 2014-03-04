@@ -15,36 +15,43 @@ static cv::Mat loadImage(const std::string& name)
 	return image;
 }
 
-
-void runCppSobel()
-{
-	IplImage *pSrc  = cvLoadImage("1.png",1);
-	IplImage *pIn   = cvCreateImage(cvSize(pSrc->width, pSrc->height), IPL_DEPTH_8U, 1);
-	IplImage *pOut  = cvCreateImage(cvSize(pSrc->width, pSrc->height), IPL_DEPTH_8U, 1);
-	cvCvtColor(pSrc, pIn, CV_BGR2GRAY);  // color to gray
-	cv::TickMeter tm;
-	tm.start();
-	CppSobel(pIn,pOut, 1, 0);
-	tm.stop();
-	printf("CppSobel time: %4.4f ms\n", tm.getTimeMilli());
-	cvNamedWindow("CppSobel",1);
-	cvShowImage("CppSobel",pOut);
-}
-
-
 void runCvSobel()
 {
-	cv::Mat _in  = loadImage("1.png");
+	cv::Mat _in  = loadImage("1.jpg");
 	cv::Mat _out;
 	_out.create(_in.size(), CV_MAKETYPE(CV_32F, _in.channels()));
 	cv::TickMeter tm;
 	tm.start();
-	Sobel(_in, _out, CV_32F, 1, 0);
+	Sobel(_in, _out, CV_32F, 1,0);
 	tm.stop();
 	printf("cvSobel  time: %4.4f ms\n", tm.getTimeMilli());
+	for(int i = 0; i < 10; i++)
+	{
+		printf("%f ",_out.at<float>(1,i));
+	}printf("\n");
 	cvNamedWindow("cvSobel",1);
 	imshow("cvSobel",_out);
 }
+
+void runCppSobel()
+{
+	cv::Mat inImage = loadImage("1.jpg");
+	cv::Mat _out;
+	_out.create(inImage.size(), CV_MAKETYPE(CV_32F, inImage.channels()));
+	cv::TickMeter tm;
+	tm.start();
+	CppSobel(inImage, _out, 1,0);
+	tm.stop();
+
+	printf("cvSobel  time: %4.4f ms\n", tm.getTimeMilli());
+	for(int i = 0; i < 10; i++)
+	{
+		printf("%f ",_out.at<float>(1,i));
+	}printf("\n");
+	cvNamedWindow("cvSobel_",1);
+	imshow("cvSobel_",_out);
+}
+
 
 int main()
 {
@@ -52,5 +59,4 @@ int main()
 	runCppSobel();
 	cvWaitKey(0);
 	return 0;
-
 }

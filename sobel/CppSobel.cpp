@@ -1,120 +1,100 @@
 #include "CppSobel.h"
 
+/******************************
+使用Mat来优化内存
 
-void CppSobel(IplImage* in, IplImage *out,
-	int xorder,int yorder,
-	int aperture_size /*CV_DEFAULT(3)*/)
+******************************/
+
+void CppSobel(const cv::Mat& in, cv::Mat& out,
+	int xorder, int yorder)
 {
+	int nRows = in.rows;
+	int nCols = in.cols;
+
 	int i,j;
-	uchar *inPtr  = NULL;
-	uchar *inPtr1 = NULL;
-	uchar *inPtr2 = NULL;
-	uchar *inPtr3 = NULL;
-	uchar *inPtr4 = NULL;
-	uchar *inPtr5 = NULL;
-	uchar *inPtr6 = NULL;
-	uchar *outPtr = NULL;
-
-	int width	  = in->width;
-	int height    = in->height;
-	int widthStep = in->widthStep;
-
-	int *pEdgeX = (int *)calloc(width*height, sizeof(int));
-	int *pEdgeY = (int *)calloc(width*height, sizeof(int));
-
-	int *pEdgeXPtr = NULL;
-	int *pEdgeYPtr = NULL;
-	uchar *edgPtr = NULL;
-	int edgeXMax = 0;
-	int edgeYMax = 0;
-
-	const int widH = 1;
-	const int widV = widthStep;
-	if(xorder)
-	{
-		for (i=1;i<height-1;i++)
-		{
-			pEdgeXPtr = pEdgeX + i*width + 1;
-			inPtr = (uchar*)in->imageData + i * widthStep + 1;
-			inPtr1 = inPtr + widH - widV;
-			inPtr2 = inPtr + widH;
-			inPtr3 = inPtr + widH + widV;
-			inPtr4 = inPtr - widH - widV;
-			inPtr5 = inPtr - widH;
-			inPtr6 = inPtr - widH + widV;
-			for (j=1;j<width-1;j++, pEdgeXPtr++)
-			{
-				*pEdgeXPtr
-					= (*inPtr1++ + (int)*inPtr2++ * 2 + *inPtr3++)
-					- (*inPtr4++ + (int)*inPtr5++ * 2 + *inPtr6++);
-				edgeXMax = std::min(edgeXMax, *pEdgeXPtr);
-			}
-		}
-	}
 
 	if(yorder)
 	{
-		for (i=1;i<height-1;i++)
+		for(int i = 1; i < nRows - 1; i++)
 		{
-			pEdgeYPtr = pEdgeY + i*width + 1;
-			inPtr  = (uchar*)in->imageData + i * widthStep + 1;
-			inPtr1 = inPtr + widV - widH;
-			inPtr2 = inPtr + widV;
-			inPtr3 = inPtr + widV + widH;
-			inPtr4 = inPtr - widV - widH;
-			inPtr5 = inPtr - widV;
-			inPtr6 = inPtr - widV + widH;
-			for (j=1;j<width-1;j++, pEdgeYPtr++)
+			for(int j = 1; j < nCols - 1; j++)
 			{
-				*pEdgeYPtr
-					= (*inPtr1++ + (int)*inPtr2++ * 2 + *inPtr3++)
-					- (*inPtr4++ + (int)*inPtr5++ * 2 + *inPtr6++);
-				edgeYMax = std::min(edgeYMax, *pEdgeYPtr);
+				float t = 0.0; 
+				t -= in.at<char>(i - 1, j - 1);
+				t -= 2 * in.at<char>(i - 1, j);
+				t -= in.at<char>(i - 1, j + 1);
+
+				t += in.at<char>(i + 1, j - 1);
+				t += 2 * in.at<char>(i + 1, j);
+				t += in.at<char>(i + 1, j + 1);
+				out.at<float>(i,j) = t;
 			}
 		}
 	}
-	if(xorder && ! yorder)
+
+	if(xorder)
 	{
-		for (i=1;i<height-1;i++)
+		for(int i = 1; i < nRows - 1; i++)
 		{
-			pEdgeXPtr = pEdgeX + i * width + 1;
-			outPtr = (uchar*)out->imageData + i * widthStep + 1;
-			for (j=1;j<width-1;j++, pEdgeXPtr++)
+			for(int j = 1; j < nCols - 1; j++)
 			{
-				*outPtr = 255.0f * (*pEdgeXPtr) / edgeXMax;
+				float t = 0.0; 
+				t -= in.at<char>(i - 1, j - 1);
+				t -= 2 * in.at<char>(i    , j - 1);
+				t -= in.at<char>(i + 1, j - 1);
+
+				t += in.at<char>(i - 1, j + 1);
+				t += 2 * in.at<char>(i, j + 1);
+				t += in.at<char>(i + 1, j + 1);
+				out.at<float>(i,j) = t;
+			}
+		}
+	}
+	
+		/*float *oneRow = (float*) cv::fastMalloc(sizeof(float) * nCols);
+		memset(oneRow,0,sizeof(sizeof(float) * nCols));
+		for(i = 0; i < 2; i++)
+		{
+			inPtr = in.ptr<uchar>(i);
+			for(j = 0; j < nCols; j++,inPtr++)
+			{
+				oneRow[j] += *inPtr;
+			}
+		}
+		for(i = 2; i < nRows; i++)
+		{
+			outPtr = (float*)(out.data) + i * (out.step.p[0] >> 2);
+			inPtr = in.ptr<uchar>(i - 1);
+			oneRowPtr = oneRow;
+			*(outPtr + 1) = *inPtr + *oneRowPtr;
+			printf("%f ",*(outPtr+1));
+			for(j = 1; j < nCols - 1; j++)
+			{
 				outPtr++;
+				inPtr++;
+				oneRowPtr++;
+				*(outPtr - 1) -= *oneRowPtr + *inPtr;
+				*(outPtr + 1) += *oneRowPtr + *inPtr;
 			}
-		}
-	}
-	else if(!xorder && yorder)
-	{
-		for (i=1;i<height-1;i++)
-		{
-			pEdgeYPtr = pEdgeY + i * width + 1;
-			outPtr = (uchar*)out->imageData + i * widthStep + 1;
-			for (j=1;j<width-1;j++, pEdgeYPtr++)
+			outPtr++;
+			inPtr++;
+			oneRowPtr++;
+			*(outPtr - 1) -= *oneRowPtr + *inPtr;
+
+			inPtr = in.ptr<uchar>(i - 2);
+			for(j = 0; j < nCols; j++,inPtr++)
 			{
-				*outPtr = 255.0f * (*pEdgeYPtr) / edgeYMax;
-				outPtr++;
+				oneRow[j] -= (float)*inPtr;
 			}
-		}
-	}
-	else
-	{
-		for (i=1;i<height-1;i++)
-		{
-			pEdgeXPtr = pEdgeX + i*width + 1;
-			pEdgeYPtr = pEdgeY + i*width + 1;
-			edgPtr = (uchar*)out->imageData + i * widthStep + 1;
-			for (j=1; j<width-1; j++, pEdgeYPtr++, pEdgeXPtr++, edgPtr++)
+
+			inPtr = in.ptr<uchar>(i);
+			for(j = 0; j < nCols; j++,inPtr++)
 			{
-				int x = *pEdgeXPtr;
-				int y = *pEdgeYPtr;
-				*edgPtr = (uchar)std::min(255,(int)(sqrt(0.0f + x * x + y * y)/2));
+				oneRow[j] += (float)*inPtr;
 			}
+
 		}
-	}
-	free(pEdgeY);
-	free(pEdgeX);
+		*/
+
 	return ;
 }
