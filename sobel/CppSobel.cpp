@@ -9,9 +9,6 @@ void CppSobel(const cv::Mat& in, cv::Mat& out,
 {
 	int nRows = in.rows;
 	int nCols = in.cols;
-
-	int i,j;
-
 	if(yorder)
 	{
 		for(int i = 1; i < nRows - 1; i++)
@@ -59,14 +56,7 @@ void CppSobel_1(const cv::Mat& in, cv::Mat& out,
 	int nRows = in.rows;
 	int nCols = in.cols;
 
-	int i,j;
-
 	float ptrVec[3] = {1.0f,2.0f,1.0f};
-/****
--1 -2 -1
- 0  0  0
- 1  2  1
-****/
 	if(yorder)
 	{
 		const char* ptrIn;
@@ -100,14 +90,10 @@ void CppSobel_1(const cv::Mat& in, cv::Mat& out,
 			ptrOut[j] += ptrIn[j - 1] + 2.0f * ptrIn[j] + ptrIn[j + 1];
 		}
 	}
-/****
--1 0 1
--2 0 2
--1 0 1
-****/
+
 	if(xorder)
 	{
-		float rowSize = sizeof(float) * nCols;
+		size_t rowSize = sizeof(float) * nCols;
 		float* ptrRow = (float*) cv::fastMalloc(rowSize);
 		memset(out.data, 0, sizeof(float) * nRows * nCols);
 		for(int i = 1; i < nRows - 1; i++)
