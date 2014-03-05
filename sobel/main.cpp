@@ -26,7 +26,7 @@ void runCvSobel()
 	_out.create(_in.size(), CV_MAKETYPE(CV_32F, _in.channels()));
 	cv::TickMeter tm;
 	tm.start();
-	Sobel(_in, _out, CV_32F, 0, 1);
+	Sobel(_in, _out, CV_32F, 1, 0);
 	tm.stop();
 	printf("cvSobel  time: %4.4f ms\n", tm.getTimeMilli());
 	/*for(int i = 0; i < 10; i++)
@@ -115,12 +115,13 @@ void checkCudaAndWarm()
 
 int main()
 {
-	float * tmp;
+	float* tmp;
 	checkCudaAndWarm();
 	runCppSobel();
 	runCvSobel();
 	runCppSobel_1();
 	runCuSobel();
 	cvWaitKey(0);
+	
 	return 0;
 }
