@@ -7,6 +7,8 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include "cuda_texture_types.h"
+#include "opencv2/core/gpumat.hpp"
+#include "opencv2/gpu/gpu.hpp"
 
 static cv::Mat loadImage(const std::string& name)
 {
@@ -29,7 +31,7 @@ void runCvSobel()
 	Sobel(_in, _out, CV_32F, 1, 0);
 	tm.stop();
 	printf("cvSobel  time: %4.4f ms\n", tm.getTimeMilli());
-	/*for(int i = 0; i < 10; i++)
+	/*for(int i = 0; i < 5; i++)
 	{
 		printf("%f ",_out.at<float>(1,i));
 	}printf("\n");*/
@@ -48,7 +50,7 @@ void runCppSobel_1()
 	tm.stop();
 
 	printf("CppSobel_1 time: %4.4f ms\n", tm.getTimeMilli());
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		printf("%f ",_out.at<float>(1,i));
 	}printf("\n");
@@ -67,7 +69,7 @@ void runCppSobel()
 	tm.stop();
 
 	printf("CppSobel time: %4.4f ms\n", tm.getTimeMilli());
-	/*for(int i = 0; i < 10; i++)
+	/*for(int i = 0; i < 5; i++)
 	{
 		printf("%f ",_out.at<float>(1,i));
 	}printf("\n");*/
@@ -88,12 +90,37 @@ void runCuSobel()
 	tm.stop();
 
 	printf("CuSobel time: %4.4f ms\n", tm.getTimeMilli());
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		printf("%f ",_out.at<float>(1,i));
 	}printf("\n");
 	//cvNamedWindow("CuSobel",1);
 	//imshow("CuSobel",_out);
+}
+
+void runOpencvGpuSobel()
+{
+	cv::Mat inImage = loadImage("1.jpg");
+	cv::Mat _in,_out;
+	inImage.convertTo(_in,CV_32F);
+	_out.create(inImage.size(), CV_MAKETYPE(CV_32F, inImage.channels()));
+
+	cv::gpu::GpuMat src(_in.size(), _in.type());
+	cv::gpu::GpuMat dst(_out.size(), _out.type());
+
+	cv::TickMeter tm;
+	tm.start();
+	src.upload(_in);
+	//Sobel(_in, _out, CV_32F, 1, 0);
+	cv::gpu::Sobel(src, dst, CV_32F, 1, 0);
+	dst.download(_out);
+	tm.stop();
+
+	printf("OpencvGpuSobel time: %4.4f ms\n", tm.getTimeMilli());
+	for(int i = 0; i < 5; i++)
+	{
+		printf("%f ",_out.at<float>(1,i));
+	}printf("\n");
 }
 
 void checkCudaAndWarm()
@@ -113,14 +140,18 @@ void checkCudaAndWarm()
 	cudaFree(pWorm);
 }
 
+
 int main()
 {
 	float* tmp;
+
 	checkCudaAndWarm();
 	runCppSobel();
 	runCvSobel();
 	runCppSobel_1();
 	runCuSobel();
+	runOpencvGpuSobel();
+
 	cvWaitKey(0);
 	
 	return 0;

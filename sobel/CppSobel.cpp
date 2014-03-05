@@ -1,5 +1,5 @@
 #include "CppSobel.h"
-
+#include "omp.h"
 /******************************
 使用Mat来优化内存
 ******************************/
@@ -45,6 +45,7 @@ void CppSobel(const cv::Mat& in, cv::Mat& out,
 				out.at<float>(i,j) = t;
 			}
 		}
+
 	}
 	return ;
 }
@@ -72,7 +73,7 @@ void CppSobel_1(const cv::Mat& in, cv::Mat& out,
 
 		for(int i = 1; i < nRows - 1; i++)
 		{
-			ptrIn = in.ptr<char>(i);
+			const char*  ptrIn   = in.ptr<char>(i);
 			float* ptrOut1 = out.ptr<float>(i - 1);
 			float* ptrOut2 = out.ptr<float>(i + 1);
 			for(int j = 1; j < nCols - 1; j++)
@@ -81,7 +82,9 @@ void CppSobel_1(const cv::Mat& in, cv::Mat& out,
 				ptrOut1[j] += t;
 				ptrOut2[j] -= t;
 			}
+
 		}
+
 
 		ptrIn = in.ptr<char>(nRows - 1);
 		ptrOut = out.ptr<float>(nRows - 2);
@@ -105,7 +108,7 @@ void CppSobel_1(const cv::Mat& in, cv::Mat& out,
 			{
 				ptrRow[f] = (ptrIn1[f] + 2 * ptrIn2[f] + ptrIn3[f]);
 			}
-			
+
 			float* ptrOut = out.ptr<float>(i);
 			ptrOut[1] -= ptrRow[0];
 			for(int j = 1; j < nCols - 1; j++)
