@@ -1,0 +1,51 @@
+﻿生成启动时间为 2014/3/7 22:12:35。
+     1>项目“D:\code\OPENCV_CUDA\SURF\SURF.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\SURF.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         D:\program\vs2010\VC\bin\CL.exe /c /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>d:\code\opencv_cuda\surf\main.cpp(250): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(250): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(250): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(250): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(251): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(251): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(251): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(251): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(285): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(285): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(285): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>d:\code\opencv_cuda\surf\main.cpp(285): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         D:\program\vs2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\code\OPENCV_CUDA\Debug\..\bin\SURF\debug\SURF.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32\cudart.lib" "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32\nppc.lib" "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32\nppi.lib" "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32\npps.lib" "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32\OpenCL.lib" opencv_core246d.lib opencv_flann246d.lib opencv_imgproc246d.lib opencv_highgui246d.lib opencv_ml246d.lib opencv_video246d.lib opencv_objdetect246d.lib opencv_features2d246d.lib opencv_calib3d246d.lib opencv_legacy246d.lib opencv_contrib246d.lib opencv_gpu246d.lib "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32\cufft.lib" opencv_photo246d.lib opencv_ocl246d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\SURF.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\code\OPENCV_CUDA\bin\SURF\debug\SURF.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\code\OPENCV_CUDA\Debug\..\bin\SURF\debug\SURF.lib" /MACHINE:X86 Debug\SURF.exe.embed.manifest.res
+         Debug\fasthessian.obj
+         Debug\integral.obj
+         Debug\ipoint.obj
+         Debug\main.obj
+         Debug\surf.obj
+         Debug\utils.obj
+       Manifest:
+         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\SURF.exe.embed.manifest" /manifest Debug\SURF.exe.intermediate.manifest
+         所有输出均为最新。
+       LinkEmbedManifest:
+         所有输出均为最新。
+         SURF.vcxproj -> D:\code\OPENCV_CUDA\Debug\..\bin\SURF\debug\SURF.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\code\OPENCV_CUDA\Debug\..\bin\SURF\debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\code\OPENCV_CUDA\Debug\..\bin\SURF\debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\code\OPENCV_CUDA\Debug\..\bin\SURF\debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart32_55.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart64_55.dll
+         已复制         2 个文件。
+       FinalizeBuildStatus:
+         正在删除文件“Debug\SURF.unsuccessfulbuild”。
+         正在对“Debug\SURF.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\code\OPENCV_CUDA\SURF\SURF.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.81

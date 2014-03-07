@@ -1,0 +1,25 @@
+﻿生成启动时间为 2014/3/7 22:00:14。
+     1>项目“D:\code\OPENCV_CUDA\SURF\SURF.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Release\SURF.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+       Link:
+         所有输出均为最新。
+         SURF.vcxproj -> D:\code\OPENCV_CUDA\Release\..\bin\SURF\release\SURF.exe
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\code\OPENCV_CUDA\Release\..\bin\SURF\release\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\code\OPENCV_CUDA\Release\..\bin\SURF\release\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\code\OPENCV_CUDA\Release\..\bin\SURF\release\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart32_55.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart64_55.dll
+         已复制         2 个文件。
+       FinalizeBuildStatus:
+         正在删除文件“Release\SURF.unsuccessfulbuild”。
+         正在对“Release\SURF.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\code\OPENCV_CUDA\SURF\SURF.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.08
