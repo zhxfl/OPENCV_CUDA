@@ -10,47 +10,59 @@
 ************************************************************/
 
 #include "utils.h"
-
+#include "opencv2/contrib/contrib.hpp"
 #include "integral.h"
 
 //! Computes the integral image of image img.  Assumes source image to be a 
 //! 32-bit floating point.  Returns IplImage of 32-bit float form.
 IplImage *Integral(IplImage *source)
 {
-  // convert the image to single channel 32f
-  IplImage *img = getGray(source);
-  IplImage *int_img = cvCreateImage(cvGetSize(img), IPL_DEPTH_32F, 1);
+	// convert the image to single channel 32f
+	cv::TickMeter tm;
+	tm.start();
+	IplImage *img = getGray(source);
+	IplImage *int_img = cvCreateImage(cvGetSize(img), IPL_DEPTH_32F, 1);
 
-  // set up variables for data access
-  int height = img->height;
-  int width = img->width;
-  int step = img->widthStep/sizeof(float);
-  float *data   = (float *) img->imageData;  
-  float *i_data = (float *) int_img->imageData;  
+	// set up variables for data access
+	int height = img->height;
+	int width = img->width;
+	int step = img->widthStep/sizeof(float);
+	float *data   = (float *) img->imageData;  
+	float *i_data = (float *) int_img->imageData;  
 
-  // first row only
-  float rs = 0.0f;
-  for(int j=0; j<width; j++) 
-  {
-    rs += data[j]; 
-    i_data[j] = rs;
-  }
+	// first row only
 
-  // remaining cells are sum above and to the left
-  for(int i=1; i<height; ++i) 
-  {
-    rs = 0.0f;
-    for(int j=0; j<width; ++j) 
-    {
-      rs += data[i*step+j]; 
-      i_data[i*step+j] = rs + i_data[(i-1)*step+j];
-    }
-  }
+	float rs = 0.0f;
+	for(int j=0; j<width; j++) 
+	{
+		rs += data[j]; 
+		i_data[j] = rs;
+	}
 
-  // release the gray image
-  cvReleaseImage(&img);
+	// remaining cells are sum above and to the left
+	for(int i=1; i<height; ++i) 
+	{
+		rs = 0.0f;
+		for(int j=0; j<width; ++j) 
+		{
+			rs += data[i*step+j]; 
+			i_data[i*step+j] = rs + i_data[(i-1)*step+j];
+		}
+	}
+	// release the gray image
 
-  // return the integral image
-  return int_img;
+
+	/*printf("check integral\n");
+	float *ptr = (float*)int_img->imageData;
+	for(int i = 0; i < 10; i++)
+	{
+		printf("%f ",ptr[i * 2]);
+	}*/
+
+
+	cvReleaseImage(&img);
+	tm.stop();
+	printf("CPP integral %fms\n",tm.getTimeMilli());
+	// return the integral image
+	return int_img;
 }
-

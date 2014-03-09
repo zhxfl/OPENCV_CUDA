@@ -14,6 +14,9 @@
 #include "opencv2/contrib/contrib.hpp"
 #include <ctime>
 #include <iostream>
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+#include "cuda_texture_types.h"
 
 //-------------------------------------------------------
 // In order to you use OpenSURF, the following illustrates
@@ -48,10 +51,11 @@ int mainImage(void)
 	drawIpoints(img, ipts);
 
 	// Display the result
-	showImage(img);
+	//showImage(img);
 
 	return 0;
 }
+
 
 //-------------------------------------------------------
 
@@ -291,13 +295,36 @@ int mainKmeans(void)
 
 //-------------------------------------------------------
 
+void checkCudaAndWarm()
+{
+	int deviceCount;
+	cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
+
+	if (error_id != cudaSuccess)
+	{
+		printf("cudaGetDeviceCount returned %d\n-> %s\n", (int)error_id, cudaGetErrorString(error_id));
+		printf("Result = FAIL\n");
+		exit(EXIT_FAILURE);
+	}
+
+	char * pWorm;
+	cudaMalloc((void**) &pWorm , 1);
+	cudaFree(pWorm);
+}
+
+
 int main(void) 
 {
+	checkCudaAndWarm();
 #define PROCEDURE 1
-  if (PROCEDURE == 1) return mainImage();
+  if (PROCEDURE == 1)
+  {
+	  mainImage();
+  }
   if (PROCEDURE == 2) return mainVideo();
   if (PROCEDURE == 3) return mainMatch();
   if (PROCEDURE == 4) return mainMotionPoints();
   if (PROCEDURE == 5) return mainStaticMatch();
   if (PROCEDURE == 6) return mainKmeans();
+  return true;
 }

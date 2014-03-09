@@ -33,41 +33,41 @@ class Ipoint {
 
 public:
 
-  //! Destructor
-  ~Ipoint() {};
+	//! Destructor
+	~Ipoint() {};
 
-  //! Constructor
-  Ipoint() : orientation(0) {};
+	//! Constructor
+	Ipoint() : orientation(0) {};
 
-  //! Gets the distance in descriptor space between Ipoints
-  float operator-(const Ipoint &rhs)
-  {
-    float sum=0.f;
-    for(int i=0; i < 64; ++i)
-      sum += (this->descriptor[i] - rhs.descriptor[i])*(this->descriptor[i] - rhs.descriptor[i]);
-    return sqrt(sum);
-  };
+	//! Gets the distance in descriptor space between Ipoints
+	float operator-(const Ipoint &rhs)
+	{
+		float sum=0.f;
+		for(int i=0; i < 64; ++i)
+			sum += (this->descriptor[i] - rhs.descriptor[i])*(this->descriptor[i] - rhs.descriptor[i]);
+		return sqrt(sum);
+	};
 
-  //! Coordinates of the detected interest point
-  float x, y;
+	//! Coordinates of the detected interest point
+	float x, y;
 
-  //! Detected scale
-  float scale;
+	//! Detected scale
+	float scale;
 
-  //! Orientation measured anti-clockwise from +ve x-axis
-  float orientation;
+	//! Orientation measured anti-clockwise from +ve x-axis
+	float orientation;
 
-  //! Sign of laplacian for fast matching purposes
-  int laplacian;
+	//! Sign of laplacian for fast matching purposes
+	int laplacian;
 
-  //! Vector of descriptor components
-  float descriptor[64];
+	//! Vector of descriptor components
+	float descriptor[64];
 
-  //! Placeholds for point motion (can be used for frame to frame motion analysis)
-  float dx, dy;
+	//! Placeholds for point motion (can be used for frame to frame motion analysis)
+	float dx, dy;
 
-  //! Used to store cluster index
-  int clusterIndex;
+	//! Used to store cluster index
+	int clusterIndex;
 };
 
 //-------------------------------------------------------

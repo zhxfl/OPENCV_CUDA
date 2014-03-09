@@ -29,6 +29,7 @@
 //! 32-bit floating point.  Returns IplImage in 32-bit float form.
 IplImage *Integral(IplImage *img);
 
+IplImage *cuIntegral(IplImage *img);
 
 //! Computes the sum of pixels within the rectangle specified by the top-left start
 //! co-ordinate and size
